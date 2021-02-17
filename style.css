@@ -1,0 +1,44 @@
+body {
+  display: flex;
+  align-items: center;
+}
+#head {
+  display: none;
+}
+#dubbelnugge{
+  display: none;
+}
+#canvas {
+border: 2px solid #14213d;
+background-color: #14213d;
+border-radius: 0.3em;
+position: absolute;
+width: 500px;
+left: 0; 
+right: 0;
+margin-left: auto; 
+margin-right: auto; 
+top: 10%;
+}
+.snek{
+font-family:Arial, Helvetica, sans-serif;
+top: 1%;
+width: fit-content;
+left: 0; 
+right: 0;
+margin-left: auto; 
+margin-right: auto; 
+position: absolute;
+}
+
+#counter{
+  font-family:Arial, Helvetica, sans-serif;
+  top: 65%;
+  color: #a06210;
+  width: fit-content;
+  left: 0; 
+  right: 0;
+  margin-left: auto; 
+  margin-right: auto; 
+  position: absolute;
+  }
