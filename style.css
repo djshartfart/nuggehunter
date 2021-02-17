@@ -33,7 +33,7 @@ position: absolute;
 
 #counter{
   font-family:Arial, Helvetica, sans-serif;
-  top: 65%;
+  top: 80vh;
   color: #a06210;
   width: fit-content;
   left: 0; 
