@@ -1,4 +1,7 @@
-const canvas = document.createElement('canvas');
+let ended = false;
+
+function start(){
+  const canvas = document.createElement('canvas');
 canvas.id = "canvas";
 canvas.width = 500
 canvas.height = 500
@@ -134,6 +137,14 @@ function update(){
     snakeBody.push(snakeBody[snakeBody.length-1])
     addDubbelNugge()
   }
+  
+  if(snakeBody.some(([x,y], index)=>index !== 0 && x == head[0] && y == head[1]) && !ended){
+    alert("Naee, du dog....")
+    ended = true
+    window.location.reload(false); 
+
+  }
+
 
   
   clear()
@@ -153,3 +164,5 @@ function update(){
 }
 
 }
+}
+start()
