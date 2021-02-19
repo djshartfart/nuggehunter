@@ -146,7 +146,7 @@ let interval = 500
 const slider = document.getElementById("speed");
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
- interval = parseInt(slider.value)
+ interval = 1000-parseInt(slider.value)
 }
 
 update()
