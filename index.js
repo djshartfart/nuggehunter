@@ -1,12 +1,20 @@
-let ended = false;
-
-function start(){
-  const canvasDiv = document.getElementById("canvasDiv")
-  const canvas = document.createElement('canvas');
+const canvasDiv = document.getElementById("canvasDiv")
+const canvas = document.createElement('canvas');
 canvas.id = "canvas";
 canvas.width = 500
 canvas.height = 500
 canvasDiv.appendChild(canvas)
+
+let interval = 500
+const slider = document.getElementById("speed");
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+ interval = 1000-parseInt(slider.value)
+}
+
+function start(){
+  let ended = false;
+
 
 const ctx = canvas.getContext("2d")
 const counter = document.getElementById("counter")
@@ -54,7 +62,6 @@ const width = parseInt(urlParams.get('width'))||10
 const nuggeAmount =  parseInt(urlParams.get('nugges'))||3
 
 const height = width
-window.onload = () => {
 
 let velocity = [0, -1]
 
@@ -142,12 +149,6 @@ for(var i = 0; i < nuggeAmount; i++){
 
 }
 
-let interval = 500
-const slider = document.getElementById("speed");
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
- interval = 1000-parseInt(slider.value)
-}
 
 update()
 
@@ -188,7 +189,8 @@ function update(){
   if(snakeBody.some(([x,y], index)=>index !== 0 && x == head[0] && y == head[1]) && !ended){
     alert("Naee, du dog....")
     ended = true
-    window.location.reload(false); 
+    snakeBody = [[5,5], [5,6], [5, 7], [5, 8], [5, 9,]]
+    start()
 
   }
 
@@ -209,6 +211,7 @@ function update(){
     }
   })
   setTimeout(() => {
+    if(ended) return;
     requestAnimationFrame(update)
   }, interval);
 
@@ -216,6 +219,6 @@ function update(){
 }
 
 
-}
+
 }
 start()
