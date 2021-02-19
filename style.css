@@ -1,6 +1,6 @@
 body {
-  display: flex;
-  align-items: center;
+  text-align: center;
+  vertical-align: middle;
 }
 #head {
   display: none;
@@ -12,33 +12,52 @@ body {
 border: 2px solid #14213d;
 background-color: #14213d;
 border-radius: 0.3em;
-position: absolute;
 width: 500px;
-left: 0; 
-right: 0;
-margin-left: auto; 
-margin-right: auto; 
-top: 10%;
+margin: auto;
+}
+#background{
+  display: none;
 }
 .snek{
 font-family:Arial, Helvetica, sans-serif;
 top: 1%;
 width: fit-content;
-left: 0; 
-right: 0;
-margin-left: auto; 
-margin-right: auto; 
-position: absolute;
+margin: auto;
 }
+input[type="file"]{
+  display: none;
+}
+.customization{
+  display:grid;
+  grid-gap: 2em;
+  margin:auto;
+  font-weight: 1000;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 2%;
+}
+
+.customization > .input {
+  cursor: pointer;
+  padding: 10px;
+  margin: 100%;
+  border-radius: 0.4em;
+  color: rgb(246, 246, 255);
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  background: rgb(62, 68, 95);
+}
+
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
+  cursor: pointer;
+}
+
+
 
 #counter{
   font-family:Arial, Helvetica, sans-serif;
   top: 80vh;
   color: #a06210;
   width: fit-content;
-  left: 0; 
-  right: 0;
-  margin-left: auto; 
-  margin-right: auto; 
-  position: absolute;
+  margin:auto;
   }

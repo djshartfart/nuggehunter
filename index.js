@@ -1,11 +1,13 @@
 let ended = false;
 
 function start(){
+  const canvasDiv = document.getElementById("canvasDiv")
   const canvas = document.createElement('canvas');
 canvas.id = "canvas";
 canvas.width = 500
 canvas.height = 500
-document.body.appendChild(canvas);
+canvasDiv.appendChild(canvas)
+
 const ctx = canvas.getContext("2d")
 const counter = document.getElementById("counter")
 let nuggesEaten = 0;
@@ -16,6 +18,32 @@ function addPoint(){
    counter.innerText = text;
 }
 const headImage = document.getElementById("head")
+const backgroundImage = document.getElementById("background")
+
+const fileInput = document.getElementById('headinp');
+fileInput.addEventListener('change', function(ev) {
+  if(ev.target.files) {
+     let file = ev.target.files[0];
+     var reader  = new FileReader();
+         
+     reader.readAsDataURL(file);
+     reader.onloadend = function (e) {
+      headImage.src = e.target.result;
+      }
+  }
+});
+const fileInput1 = document.getElementById('backinp');
+fileInput1.addEventListener('change', function(ev) {
+  if(ev.target.files) {
+     let file = ev.target.files[0];
+     var reader  = new FileReader();
+         
+     reader.readAsDataURL(file);
+     reader.onloadend = function (e) {
+      backgroundImage.src = e.target.result;
+      }
+  }
+});
 const dubbelNuggeImage = document.getElementById("dubbelnugge")
 
 const queryString = window.location.search;
@@ -76,11 +104,22 @@ function drawBlock(x,y,color, rmX, rmY){
 function clear(){
   ctx.fillStyle = "#14213d"
   ctx.fillRect(0,0, canvas.width, canvas.height)
-  for(var x = 0; x < width; x++){
-    for(var y = 0; y < width; y++){
-      drawBlock(x,y, "#0f4c5c", 1, 1)
-    }
+  if(backgroundImage.src){
+    ctx.drawImage(backgroundImage,0,0, canvas.width, canvas.height)
   }
+  ctx.strokeStyle = "#0f4c5c"
+
+  for(var x = 0; x < width; x++){
+    ctx.moveTo(x*blockWidth, 0)
+    ctx.lineTo(x*blockWidth, canvas.height)
+
+  }
+  for(var y = 0; y < width; y++){
+    ctx.moveTo(0,y*blockHeight)
+    ctx.lineTo(canvas.height, y*blockHeight)
+  }
+  ctx.stroke()
+
   
 }
 clear()
@@ -88,7 +127,7 @@ let snakeBody = [[5,5], [5,6], [5, 7], [5, 8], [5, 9,]]
 
 var audio = new Audio('music.mp3');
 audio.play();
-audio.volume = 0.02;
+audio.volume = 0.1;
 
 let dubbelNugges = []
 function addDubbelNugge(){
@@ -96,14 +135,22 @@ function addDubbelNugge(){
   const y = Math.floor(Math.random()*height)
   dubbelNugges.push([x,y])
 }
-update()
 
-setInterval(update, 1000/6)
 
 for(var i = 0; i < nuggeAmount; i++){
   addDubbelNugge()
 
 }
+
+let interval = 500
+const slider = document.getElementById("speed");
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+ interval = parseInt(slider.value)
+}
+
+update()
+
 function update(){
   let head = snakeBody[0].map((n,i)=>velocity[i]?n+velocity[i]:n)
 
@@ -161,7 +208,13 @@ function update(){
       drawBlock(x,y,"#52b788", 1,1)
     }
   })
+  setTimeout(() => {
+    requestAnimationFrame(update)
+  }, interval);
+
+
 }
+
 
 }
 }
